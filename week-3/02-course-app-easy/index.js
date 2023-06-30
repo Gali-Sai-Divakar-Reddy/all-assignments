@@ -10,10 +10,24 @@ let COURSES = [];
 // Admin routes
 app.post('/admin/signup', (req, res) => {
   // logic to sign up admin
+  const {email, password} = req.body
+  const existingAdmin = ADMINS.find(admin => admin.email === email)
+  if (existingAdmin){
+    res.status(400).json({error: "admin already exists"})
+  }
+  const admin = {email, password}
+  ADMINS.push(admin)
+  res.status(201).json({message:"admin signed up successfully"})
 });
 
 app.post('/admin/login', (req, res) => {
   // logic to log in admin
+  const {email, password} = req.body
+  const existingAdmin = ADMINS.find(admin => admin.email === email && admin.password === password)
+  if (!existingAdmin){
+    res.status(401).json({error:"incorrect email or password"})
+  }
+  res.json({message: "admin logged in successfully"})
 });
 
 app.post('/admin/courses', (req, res) => {
