@@ -8,6 +8,8 @@ let ADMINS = [];
 let USERS = [];
 let COURSES = [];
 
+//added a comment
+
 const secretKey = "sudim34goa1u"
 
 const generateJwt = (user) => {
